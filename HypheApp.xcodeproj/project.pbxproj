@@ -14,6 +14,7 @@
 		6AF1FB5222D4F7EC00AC06B3 /* HypheTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF1FB5122D4F7EC00AC06B3 /* HypheTableViewController.swift */; };
 		6AF1FB5922D4F9A400AC06B3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF1FB5822D4F9A400AC06B3 /* CloudKit.framework */; };
 		6AF1FB5B22D4F9F800AC06B3 /* Hyphe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF1FB5A22D4F9F800AC06B3 /* Hyphe.swift */; };
+		6AF1FB5E22D5002A00AC06B3 /* HypheController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF1FB5D22D5002A00AC06B3 /* HypheController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		6AF1FB5622D4F9A200AC06B3 /* HypheApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HypheApp.entitlements; sourceTree = "<group>"; };
 		6AF1FB5822D4F9A400AC06B3 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		6AF1FB5A22D4F9F800AC06B3 /* Hyphe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hyphe.swift; sourceTree = "<group>"; };
+		6AF1FB5D22D5002A00AC06B3 /* HypheController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypheController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				6AF1FB5522D4F81B00AC06B3 /* Views */,
 				6AF1FB5322D4F7F800AC06B3 /* View Controller */,
 				6AF1FB5C22D4F9FD00AC06B3 /* Model */,
+				6AF1FB5F22D5003C00AC06B3 /* Model Controller */,
 			);
 			path = HypheApp;
 			sourceTree = "<group>";
@@ -111,6 +114,14 @@
 				6AF1FB5A22D4F9F800AC06B3 /* Hyphe.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6AF1FB5F22D5003C00AC06B3 /* Model Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6AF1FB5D22D5002A00AC06B3 /* HypheController.swift */,
+			);
+			path = "Model Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +205,7 @@
 			files = (
 				6AF1FB5B22D4F9F800AC06B3 /* Hyphe.swift in Sources */,
 				6AF1FB5222D4F7EC00AC06B3 /* HypheTableViewController.swift in Sources */,
+				6AF1FB5E22D5002A00AC06B3 /* HypheController.swift in Sources */,
 				6AF1FB4022D4F72200AC06B3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,7 +14,7 @@ import CloudKit
 struct Constants {
     static let recordTypeKey = "Hyphe"
     fileprivate static let recordTextKey = "Text"
-    fileprivate static let recordTimestampKey = "Timestamp"
+    static let recordTimestampKey = "Timestamp"
 }
 
 class Hyphe {
@@ -23,7 +23,7 @@ class Hyphe {
     let timestamp: Date
     
     // designated initializer
-    init(hypheText: String, timestamp: Date) {
+    init(hypheText: String, timestamp: Date = Date()) {
         
         self.hypheText = hypheText
         self.timestamp = timestamp

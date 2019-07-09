@@ -8,32 +8,86 @@
 
 import UIKit
 
-class HypheTableViewController: UITableViewController {
+class HypheTableViewController: UITableViewController, UITextFieldDelegate {
 
+    var refresh: UIRefreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        refresh.attributedTitle = NSAttributedString(string: "Pull to see new Hyphe")
+        // similar from ObjC
+        refresh.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        self.tableView.addSubview(refresh)
+        
+        loadData()
+    }
     
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        presentAddHypheAlert()
+        
+    }
+    
+    // helper function alert controller
+    func presentAddHypheAlert() {
+        
+        let alertController = UIAlertController(title: "Get Hype", message: "What is hype may never die", preferredStyle: .alert)
+        
+        alertController.addTextField { (textField) -> Void in
+            textField.placeholder = "Enter you Hype here..."
+            textField.autocorrectionType = .yes
+            textField.autocapitalizationType = .sentences
+            textField.delegate = self
+        }
+        let addHypeAction = UIAlertAction(title: "Send", style: .default) { (_) in
+            guard let hypeText = alertController.textFields?.first?.text else {return}
+            if hypeText != "" {
+                HypheController.sharedInstance.saveHyphe(with: hypeText, completion: { (success) in
+                    if success {
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    }
+                })
+            }
+        }
+        let cancelAction = UIAlertAction(title:"Cancel", style: .destructive)
+        
+        alertController.addAction(addHypeAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true)
     }
 
+    //Helper function, marking as ObjC @objc
+    @objc func loadData() {
+        
+        HypheController.sharedInstance.fetchDemHyphes { (success) in
+            if success {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    // stop refreshing
+                    self.refresh.endRefreshing()
+                }
+            }
+        }
+    }
+    
+    
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return HypheController.sharedInstance.hyphes.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "hypheCell", for: indexPath)
+        
+        let hyphe = HypheController.sharedInstance.hyphes[indexPath.row]
+        
+        cell.textLabel?.text = hyphe.hypheText
+        cell.detailTextLabel?.text = "\(hyphe.timestamp)"
+        
         return cell
     }
     
